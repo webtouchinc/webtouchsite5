@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Reservation System</title>
+    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #007bff;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #0056b3;
+            padding: 15px 0;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #004494;
+        }
+
+        
+        .hero {
+            background: url('1.jpeg') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+        }
+
+        .hero-content {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 10px;
+        }
+
+        .hero-content h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero-content p {
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+
+        .hero-content button {
+            padding: 15px 30px;
+            background-color: #ff5722;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .hero-content button:hover {
+            background-color: #e64a19;
+        }
+
+        /* Main Content */
+        main {
+            padding: 80px 20px;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        main h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+        }
+
+        .route-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .route-item {
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 300px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .route-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .route-item h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .route-item p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .route-item button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .route-item button:hover {
+            background-color: #0056b3;
+        }
+
+        
+        .seat-selection {
+            padding: 80px 20px;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        .seat-selection h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+        }
+
+        .bus-seat-map {
+            display: grid;
+            grid-template-columns: repeat(5, 50px);
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .seat {
+            width: 50px;
+            height: 50px;
+            background-color: #007bff;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .seat:hover {
+            background-color: #0056b3;
+        }
+
+        .seat.selected {
+            background-color: #ff5722;
+        }
+
+        
+        .contact {
+            padding: 80px 20px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .contact-form button {
+            padding: 15px 30px;
+            background-color: #ff5722;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background-color: #e64a19;
+        }
+
+        footer {
+            padding: 20px;
+            background-color: #0056b3;
+            color: #fff;
+            text-align: center;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .route-item, .seat {
+                max-width: 100%;
+                grid-template-columns: repeat(2, 50px);
+            }
+
+            .hero-content h2 {
+                font-size: 36px;
+            }
+
+            .hero-content p {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h2 {
+                font-size: 28px;
+            }
+
+            .hero-content p {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Bus Reservation System</h1>
+</header>
+
+<nav>
+    <a href="#home">Home</a>
+    <a href="#routes">Routes</a>
+    <a href="#seats">Seats</a>
+    <a href="#contact">Contact</a>
+</nav>
+
+<section class="hero" id="home">
+    <div class="hero-content">
+        <h2>Book Your Bus Tickets Online</h2>
+        <p>Fast, Secure, and Convenient Travel Experience</p>
+        <button>Book Now</button>
+    </div>
+</section>
+
+<main>
+    <section class="routes" id="routes">
+        <h2>Available Routes</h2>
+        <div class="route-list">
+            <div class="route-item">
+                <h3>Paris - Lille</h3>
+                <p>Departure: 09:00 AM | Arrival: 12:00 PM</p>
+                <button>Select Route</button>
+            </div>
+            <div class="route-item">
+                <h3>Douala - Yaounde</h3>
+                <p>Departure: 10:00 AM | Arrival: 02:00 PM</p>
+                <button>Select Route</button>
+            </div>
+            <div class="route-item">
+                <h3>Los Angeles - San Francisco</h3>
+                <p>Departure: 08:00 AM | Arrival: 12:00 PM</p>
+                <button>Select Route</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="seat-selection" id="seats">
+        <h2>Select Your Seats</h2>
+        <div class="bus-seat-map">
+            <div class="seat">1</div>
+            <div class="seat">2</div>
+            <div class="seat">3</div>
+            <div class="seat">4</div>
+            <div class="seat">5</div>
+            <div class="seat">6</div>
+            <div class="seat">7</div>
+            <div class="seat">8</div>
+            <div class="seat">9</div>
+            <div class="seat">10</div>
+            <div class="seat">11</div>
+            <div class="seat">12</div>
+            <div class="seat">13</div>
+            <div class="seat">14</div>
+            <div class="seat">15</div>
+        </div>
+    </section>
+</main>
+
+<section class="contact" id="contact">
+    <h2>Contact Us</h2>
+    <form class="contact-form">
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea placeholder="Your Message" rows="5" required></textarea>
+        <button type="submit">Send Message</button>
+    </form>
+</section>
+
+<footer>
+    <p>&copy; 2024 Webtouch Bus Reservation System. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
